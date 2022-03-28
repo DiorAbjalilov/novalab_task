@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 25px;
+}
+header .css-1oqv2c0-MuiPaper-root-MuiCard-root {
+  width: 30% !important;
+  cursor: pointer;
+  transition: ease-in-out 0.25s;
+}
+header div.css-1oqv2c0-MuiPaper-root-MuiCard-root:hover {
+  transform: scale(1.04);
+}

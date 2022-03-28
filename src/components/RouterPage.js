@@ -18,12 +18,11 @@ const RouterPage = () => {
 
   return (
     <>
-      {/* <NavbarComponent /> */}
+      {isLoginUserToken ? <NavbarComponent /> : ""}
+
       <Routes>
-        <Route element={<NavbarComponent />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/profil" element={<ProfilPage />} />
-        </Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="profil" element={<ProfilPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </>
