@@ -1,5 +1,11 @@
+import RouterPage from "./components/RouterPage";
+
 function App() {
-  return <div>hello</div>;
+  return (
+    <>
+      <RouterPage />
+    </>
+  );
 }
 
 export default App;
