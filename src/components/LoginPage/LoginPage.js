@@ -1,23 +1,33 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import { InputLabel, Input, FormGroup, Button } from "@mui/material";
-import { CHANGE_INPUT, SIGUP } from "../../reducer/types";
+// import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
+// import { CHANGE_INPUT, SIGUP } from "../../reducer/types";
 import { changeInput } from "../../reducer/actions";
 import "./style.css";
-const LoginPage = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const LoginPage = ({ mapDispatchToProps, mapStateToProps }) => {
+  // const data = useSelector((state) => state.Login_Reducer);
+  // const dispatch = useDispatch();
+  // console.log(data);
   const [login, setLogin] = useState(false);
+  // const [userEmail, setUserEmail] = useState(data.signin);
   const ClickLoginHandleTrue = () => {
     setLogin(true);
   };
   const ClickLoginHandleFalse = () => {
     setLogin(false);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(userEmail);
+    // dispatch(changeInput(userEmail));
+  };
+
   return (
     <>
-      {/* Login Page */}
       <section className="login">
-        <form>
+        <form onSubmit={handleSubmit}>
           <FormGroup>
             <div>
               <Button
@@ -35,10 +45,24 @@ const LoginPage = () => {
             </div>
             <h2>{login ? "Sign In" : "Sign Up"}</h2>
             <InputLabel htmlFor="userEmail">User Email</InputLabel>
-            <Input id="userEmail" />
+            <Input
+              id="userEmail"
+              name="userEmail"
+              // onChange={(e) =>
+              //   dispatch(changeInput(e.target.name, e.target.value))
+              // }
+            />
             <InputLabel htmlFor="password">Password</InputLabel>
-            <Input id="password" />
-            <Button variant="contained">{login ? "Sign In" : "Sign Up"}</Button>
+            <Input
+              id="password"
+              name="password"
+              // onChange={(e) =>
+              //   dispatch(changeInput(e.target.name, e.target.value))
+              // }
+            />
+            <Button type="submit" variant="contained">
+              {login ? "Sign In" : "Sign Up"}
+            </Button>
           </FormGroup>
         </form>
       </section>
@@ -46,12 +70,12 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+// export default LoginPage;
 
-// const mapDispatch = {
-//   changeInputHandle: changeInput,
-// };
+const mapDispatchToProps = {
+  changeInputHandler: changeInput,
+};
 
-// const mapState=(state)=>({state:state.LoginReducer})
+const mapStateToProps = (state) => ({ state: state.Login_Reducer.signin });
 
-// export default connect(mapDispatch)(LoginPage)
+export default connect(mapDispatchToProps, mapStateToProps)(LoginPage);

@@ -28,15 +28,9 @@ const Navbar = () => {
             onChange={handleChange}
             aria-label="nav tabs example"
           >
-            <Tab label="Home">
-              <Link to={"/"}>Home</Link>
-            </Tab>
-            <Tab label="Profil">
-              <Link to={"/profil"}>profile</Link>
-            </Tab>
-            <Tab label="Log in">
-              <Link to={"/login"}>login</Link>
-            </Tab>
+            <Tab label="Home" />
+            <Tab label="Profil" />
+            <Tab label="Log in" />
           </Tabs>
         </Box>
       </nav>
