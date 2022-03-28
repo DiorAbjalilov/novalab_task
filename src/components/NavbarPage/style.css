@@ -1,0 +1,6 @@
+nav {
+  display: flex;
+}
+.MuiBox-root {
+  width: 80% !important;
+}

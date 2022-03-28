@@ -1,27 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputLabel, Input, FormGroup, Button } from "@mui/material";
-// import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-// import { CHANGE_INPUT, SIGUP } from "../../reducer/types";
+import { useDispatch, useSelector } from "react-redux";
+
 import { changeInput } from "../../reducer/actions";
 import "./style.css";
-const LoginPage = ({ mapDispatchToProps, mapStateToProps }) => {
-  // const data = useSelector((state) => state.Login_Reducer);
-  // const dispatch = useDispatch();
-  // console.log(data);
+import { signIn } from "../../reducer/loginReducer";
+import { useNavigate } from "react-router-dom";
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const data = useSelector((state) => state.Login_Reducer);
+  const dispatch = useDispatch();
+  console.log(data);
   const [login, setLogin] = useState(false);
-  // const [userEmail, setUserEmail] = useState(data.signin);
   const ClickLoginHandleTrue = () => {
     setLogin(true);
   };
   const ClickLoginHandleFalse = () => {
     setLogin(false);
   };
-
-  const handleSubmit = (e) => {
+  const isLoginUserToken = localStorage.getItem("isLoginMeToken");
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(userEmail);
-    // dispatch(changeInput(userEmail));
+    dispatch(signIn());
+    console.log(isLoginUserToken);
+    if (isLoginUserToken) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -43,22 +49,21 @@ const LoginPage = ({ mapDispatchToProps, mapStateToProps }) => {
                 Sign Up
               </Button>
             </div>
-            <h2>{login ? "Sign In" : "Sign Up"}</h2>
             <InputLabel htmlFor="userEmail">User Email</InputLabel>
             <Input
               id="userEmail"
               name="userEmail"
-              // onChange={(e) =>
-              //   dispatch(changeInput(e.target.name, e.target.value))
-              // }
+              onChange={(e) =>
+                dispatch(changeInput(e.target.name, e.target.value))
+              }
             />
             <InputLabel htmlFor="password">Password</InputLabel>
             <Input
               id="password"
               name="password"
-              // onChange={(e) =>
-              //   dispatch(changeInput(e.target.name, e.target.value))
-              // }
+              onChange={(e) =>
+                dispatch(changeInput(e.target.name, e.target.value))
+              }
             />
             <Button type="submit" variant="contained">
               {login ? "Sign In" : "Sign Up"}
@@ -70,12 +75,4 @@ const LoginPage = ({ mapDispatchToProps, mapStateToProps }) => {
   );
 };
 
-// export default LoginPage;
-
-const mapDispatchToProps = {
-  changeInputHandler: changeInput,
-};
-
-const mapStateToProps = (state) => ({ state: state.Login_Reducer.signin });
-
-export default connect(mapDispatchToProps, mapStateToProps)(LoginPage);
+export default LoginPage;

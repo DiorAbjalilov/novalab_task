@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -14,8 +14,6 @@ const Navbar = () => {
       navigate("/");
     } else if (newValue === 1) {
       navigate("/profil");
-    } else if (newValue === 2) {
-      navigate("/login");
     }
   };
 
@@ -30,9 +28,9 @@ const Navbar = () => {
           >
             <Tab label="Home" />
             <Tab label="Profil" />
-            <Tab label="Log in" />
           </Tabs>
         </Box>
+        <h3>Welcome! Diyor</h3>
       </nav>
     </>
   );
