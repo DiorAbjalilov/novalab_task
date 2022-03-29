@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.modal {
+  position: absolute;
+  margin: 10% 25%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 15px;
+  align-items: center;
+  gap: 25px;
+  justify-content: center;
+  box-shadow: 1px 1px 10px #999;
+}
+.modal .css-1oqv2c0-MuiPaper-root-MuiCard-root {
+  width: 400px !important;
+}

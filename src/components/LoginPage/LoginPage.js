@@ -3,7 +3,6 @@ import { InputLabel, Input, FormGroup, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
-import LoadingComponent from "../loader/LoadingComponent";
 import { useDispatch } from "react-redux";
 import { SHOW_LOADER, HIDE_LOADER } from "../../reducer/types";
 
@@ -36,7 +35,7 @@ const LoginPage = () => {
         navigate("/");
         setTimeout(() => {
           dispatch({ type: HIDE_LOADER });
-        }, 4000);
+        }, 2000);
       } else {
         navigate("/login");
       }

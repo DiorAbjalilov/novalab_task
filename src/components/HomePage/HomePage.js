@@ -5,8 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import "./style.css";
-import { usersData } from "../../reducer/actions";
+import { modalUser, usersData } from "../../reducer/actions";
+import UserModal from "../UserModal";
 import { useSelector, useDispatch } from "react-redux";
+import { USER_MODAL_SHOW } from "../../reducer/types";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users_Reducer);
@@ -16,13 +18,18 @@ const HomePage = () => {
   const ClickPageHandler = (e) => {
     dispatch(usersData(e.target.innerText));
   };
-  // george.bluth@reqres.in
+  const isModal = useSelector((state) => state.users_Reducer.isModal);
   return (
     <>
+      {isModal ? <UserModal /> : ""}
       <header>
         {users.map((user, index) => {
           return (
-            <Card key={index} sx={{ display: "flex" }}>
+            <Card
+              key={index}
+              sx={{ display: "flex" }}
+              onClick={() => dispatch(modalUser(user.id))}
+            >
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <CardContent sx={{ flex: "1 0 auto" }}>
                   <Typography component="div" variant="h5">
