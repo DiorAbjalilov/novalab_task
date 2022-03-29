@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import "./style.css";
+import axios from "axios";
 const Navbar = () => {
   const [value, setValue] = useState(0);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
@@ -16,6 +18,17 @@ const Navbar = () => {
       navigate("/profil");
     }
   };
+
+  const isLoginUser = JSON.parse(localStorage.getItem("isLoginMeToken"));
+  const fetchUserLogin = async () => {
+    const api = `https://reqres.in/api/users/${isLoginUser.id}`;
+    const respons = await axios.get(api);
+    const resData = await respons.data.data;
+    setUserName(resData);
+  };
+  useEffect(() => {
+    fetchUserLogin();
+  }, []);
 
   return (
     <>
@@ -30,7 +43,7 @@ const Navbar = () => {
             <Tab label="Profil" />
           </Tabs>
         </Box>
-        <h3>Welcome! Diyor</h3>
+        <h3>Welcome! {userName.first_name}</h3>
       </nav>
     </>
   );

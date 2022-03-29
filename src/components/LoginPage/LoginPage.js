@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 import LoadingComponent from "../loader/LoadingComponent";
+import { useDispatch } from "react-redux";
+import { SHOW_LOADER, HIDE_LOADER } from "../../reducer/types";
 
 const LoginPage = () => {
   const [login, setLogin] = useState(false);
   const [valueUserInput, setValueUserInput] = useState({});
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const ClickLoginHandleTrue = () => {
     setLogin(true);
   };
@@ -23,7 +26,7 @@ const LoginPage = () => {
       password,
     };
     if (login) {
-      console.log("in");
+      dispatch({ type: SHOW_LOADER });
       const api = "https://reqres.in/api/login";
       const dataFetch = await axios.post(api, data);
       const resData = await dataFetch.data;
@@ -31,12 +34,13 @@ const LoginPage = () => {
       const isLoginUserToken = localStorage.getItem("isLoginMeToken");
       if (isLoginUserToken) {
         navigate("/");
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADER });
+        }, 4000);
       } else {
         navigate("/login");
       }
     } else {
-      console.log("up");
-      console.log(valueUserInput);
       const api = "https://reqres.in/api/register";
       const dataFetch = await axios.post(api, data);
       const resData = await dataFetch.data;

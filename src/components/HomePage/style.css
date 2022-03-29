@@ -13,3 +13,14 @@ header .css-1oqv2c0-MuiPaper-root-MuiCard-root {
 header div.css-1oqv2c0-MuiPaper-root-MuiCard-root:hover {
   transform: scale(1.04);
 }
+footer {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  column-gap: 10px;
+  justify-content: center;
+}
+footer p {
+  padding: 5px;
+  cursor: pointer;
+}
