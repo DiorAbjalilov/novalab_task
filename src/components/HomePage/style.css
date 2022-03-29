@@ -6,7 +6,7 @@ header {
   row-gap: 25px;
 }
 header .css-1oqv2c0-MuiPaper-root-MuiCard-root {
-  width: 30% !important;
+  width: 350px !important;
   cursor: pointer;
   transition: ease-in-out 0.25s;
 }

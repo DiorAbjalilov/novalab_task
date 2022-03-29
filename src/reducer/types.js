@@ -1,4 +1,4 @@
-export const CHANGE_INPUT = "CHANGE_INPUT";
 export const SIGUP = "SIGNUP";
-export const SIGIN = "SIGNIN";
-export const USERS = "USERS";
+export const SHOW_LOADER = "SHOW_LOADER";
+export const HIDE_LOADER = "HIDE_LOADER";
+export const GET_USERS = "GET_USERS";

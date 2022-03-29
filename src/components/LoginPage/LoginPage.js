@@ -1,32 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { InputLabel, Input, FormGroup, Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-
-import { changeInput } from "../../reducer/actions";
-import "./style.css";
-import { signIn } from "../../reducer/loginReducer";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./style.css";
+import LoadingComponent from "../loader/LoadingComponent";
+
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const data = useSelector((state) => state.Login_Reducer);
-  const dispatch = useDispatch();
-  console.log(data);
   const [login, setLogin] = useState(false);
+  const [valueUserInput, setValueUserInput] = useState({});
+  const navigate = useNavigate();
   const ClickLoginHandleTrue = () => {
     setLogin(true);
   };
   const ClickLoginHandleFalse = () => {
     setLogin(false);
   };
-  const isLoginUserToken = localStorage.getItem("isLoginMeToken");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signIn());
-    console.log(isLoginUserToken);
-    if (isLoginUserToken) {
-      navigate("/");
+    const { email, password } = valueUserInput;
+    const data = {
+      email,
+      password,
+    };
+    if (login) {
+      console.log("in");
+      const api = "https://reqres.in/api/login";
+      const dataFetch = await axios.post(api, data);
+      const resData = await dataFetch.data;
+      localStorage.setItem("isLoginMeToken", JSON.stringify(resData));
+      const isLoginUserToken = localStorage.getItem("isLoginMeToken");
+      if (isLoginUserToken) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
     } else {
-      navigate("/login");
+      console.log("up");
+      console.log(valueUserInput);
+      const api = "https://reqres.in/api/register";
+      const dataFetch = await axios.post(api, data);
+      const resData = await dataFetch.data;
+      localStorage.setItem("isLoginMeToken", JSON.stringify(resData));
+      const isLoginUserToken = localStorage.getItem("isLoginMeToken");
+      if (isLoginUserToken) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
     }
   };
 
@@ -52,9 +72,9 @@ const LoginPage = () => {
             <InputLabel htmlFor="userEmail">User Email</InputLabel>
             <Input
               id="userEmail"
-              name="userEmail"
+              name="email"
               onChange={(e) =>
-                dispatch(changeInput(e.target.name, e.target.value))
+                setValueUserInput({ [e.target.name]: e.target.value })
               }
             />
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -62,7 +82,10 @@ const LoginPage = () => {
               id="password"
               name="password"
               onChange={(e) =>
-                dispatch(changeInput(e.target.name, e.target.value))
+                setValueUserInput({
+                  ...valueUserInput,
+                  [e.target.name]: e.target.value,
+                })
               }
             />
             <Button type="submit" variant="contained">

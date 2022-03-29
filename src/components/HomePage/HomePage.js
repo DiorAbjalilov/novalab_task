@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import "./style.css";
+import { usersData } from "../../reducer/actions";
+import { useSelector } from "react-redux";
 const HomePage = () => {
+  const data = useSelector((state) => state);
+  console.log(data);
+  useEffect(() => {
+    usersData();
+  }, []);
   return (
     <>
       <header>

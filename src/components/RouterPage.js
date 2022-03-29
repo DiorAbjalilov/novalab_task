@@ -19,7 +19,6 @@ const RouterPage = () => {
   return (
     <>
       {isLoginUserToken ? <NavbarComponent /> : ""}
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="profil" element={<ProfilPage />} />
