@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +8,6 @@ import "./style.css";
 import { modalUser, usersData } from "../../reducer/actions";
 import UserModal from "../UserModal";
 import { useSelector, useDispatch } from "react-redux";
-import { USER_MODAL_SHOW } from "../../reducer/types";
 const HomePage = () => {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.users_Reducer);
